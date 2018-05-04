@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GCODE_PROGRAM_H
+#define GCODE_PROGRAM_H
 
 #include <cassert>
 #include <iostream>
@@ -375,6 +376,7 @@ namespace gpr {
     std::vector<block> blocks;
 
   public:
+	  gcode_program(){}
     gcode_program(const std::vector<block>& p_blocks) :
       blocks(p_blocks) {}
 
@@ -402,3 +404,5 @@ namespace gpr {
   addr make_double_address(const double i);
   
 }
+
+#endif //GCODE_PROGRAM_H

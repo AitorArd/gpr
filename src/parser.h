@@ -1,4 +1,5 @@
-#pragma once
+#ifndef PARSER_H
+#define PARSER_H
 
 #include <string>
 
@@ -12,4 +13,7 @@ namespace gpr {
 
   gcode_program parse_gcode_saving_block_text(const std::string& program_text);
 
+  gcode_program parse_gcode_file(const std::string& filepath);
 }
+
+#endif //PARSER_H

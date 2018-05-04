@@ -95,6 +95,16 @@ namespace gpr {
     return i;
   }
 
+  string parse_state_string(parse_state& s) {
+	  string text = "";
+	  do {
+		  text += s.next();
+		  s++;
+	  } while (s.chars_left() > 0);
+
+	  return text;
+  }
+
   addr parse_address(char c, parse_stream<string>& s) {
     switch(c) {
     case 'X':
@@ -150,11 +160,14 @@ namespace gpr {
     case 'd':
     case 'l':
       return make_int_address(parse_int(s));
+	case '+':
+		s.next();
+		return make_double_address(parse_double(s));
     default:
       cout << "Invalid c = " << c << endl;
       cout << "Invalid c as int = " << ((int) c) << endl;
       cout << "Is EOF? " << (((int) c) == EOF) << endl;
-      assert(false);
+	assert(false);
     }
   }
   
@@ -223,7 +236,7 @@ namespace gpr {
     s++;
 
     addr a = parse_address(c, s);
-    return chunk(c, a);
+	return chunk(c, a);
   }
 
   chunk parse_chunk(parse_stream<string>& s) {
@@ -327,10 +340,10 @@ namespace gpr {
 
       if (line.size() > 0) {
 
-	vector<string> line_tokens = lex_block(line);
+		vector<string> line_tokens = lex_block(line);
 
-	block b = parse_tokens(line_tokens);
-	blocks.push_back(b);
+		block b = parse_tokens(line_tokens);
+		blocks.push_back(b);
       }
 
       line_start += line.size() + 1;
@@ -413,4 +426,12 @@ namespace gpr {
     return tokens;
   }
 
+  gcode_program parse_gcode_file(const std::string& filepath) {
+
+	  std::ifstream t(filepath.c_str());
+	  std::string file_contents((std::istreambuf_iterator<char>(t)),
+		  std::istreambuf_iterator<char>());
+
+	  return parse_gcode(file_contents);
+  }
 }
