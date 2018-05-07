@@ -25,10 +25,10 @@ namespace gpr {
     return addr{ADDRESS_TYPE_INTEGER, v};
   }
 
-  addr make_double_address(const double i) {
+  addr make_float_address(const float i) {
     addr_value v;
-    v.dbl_val = i;
-    return addr{ADDRESS_TYPE_DOUBLE, v};
+    v.flt_val = i;
+    return addr{ADDRESS_TYPE_FLOAT, v};
   }
   
   chunk make_word_int(const char c, const int i) {
@@ -36,9 +36,9 @@ namespace gpr {
     return chunk(c, int_address);
   }
 
-  chunk make_word_double(const char c, const double i) {
-    addr double_addr = make_double_address(i);
-    return chunk(c, double_addr);
+  chunk make_word_float(const char c, const float i) {
+    addr float_addr = make_float_address(i);
+    return chunk(c, float_addr);
   }
 
   bool operator==(const chunk& l, const chunk& r) {

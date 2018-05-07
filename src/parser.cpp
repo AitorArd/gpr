@@ -77,9 +77,9 @@ namespace gpr {
     assert(false);
   }
 
-  double parse_double(parse_stream<string>& s) {
+  float parse_float(parse_stream<string>& s) {
 
-    double v = stod(s.next());
+    float v = stod(s.next());
 
     s++;
 
@@ -140,7 +140,7 @@ namespace gpr {
     case 's':
     case 'q':
     case 'E':
-      return make_double_address(parse_double(s));
+      return make_float_address(parse_float(s));
     case 'G':
     case 'H':
     case 'M':
@@ -162,7 +162,7 @@ namespace gpr {
       return make_int_address(parse_int(s));
 	case '+':
 		s.next();
-		return make_double_address(parse_double(s));
+		return make_float_address(parse_float(s));
     default:
       cout << "Invalid c = " << c << endl;
       cout << "Invalid c as int = " << ((int) c) << endl;

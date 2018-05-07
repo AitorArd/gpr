@@ -11,11 +11,11 @@ namespace gpr {
 
   enum address_type {
     ADDRESS_TYPE_INTEGER = 0,
-    ADDRESS_TYPE_DOUBLE
+    ADDRESS_TYPE_FLOAT
   };
 
   union addr_value {
-    double dbl_val;
+    float flt_val;
     int int_val;
   };
 
@@ -34,10 +34,10 @@ namespace gpr {
 
     address_type tp() const { return ad_type; }
 
-    double double_value() const {
-      assert(tp() == ADDRESS_TYPE_DOUBLE);
+    float float_value() const {
+      assert(tp() == ADDRESS_TYPE_FLOAT);
 
-      return val.dbl_val;
+      return val.flt_val;
     }
 
     int int_value() const {
@@ -51,16 +51,16 @@ namespace gpr {
 	return false;
       }
 
-      if (other.tp() == ADDRESS_TYPE_DOUBLE) {
-	return other.double_value() == double_value();
+      if (other.tp() == ADDRESS_TYPE_FLOAT) {
+	return other.float_value() == float_value();
       }
 
       return other.int_value() == int_value();
     }
 
     void print(std::ostream& out) const {
-      if (tp() == ADDRESS_TYPE_DOUBLE) {
-	out << double_value();
+      if (tp() == ADDRESS_TYPE_FLOAT) {
+	out << float_value();
 	return;
       }
 
@@ -253,7 +253,7 @@ namespace gpr {
 
   chunk make_isolated_word(const char c);
   chunk make_word_int(const char c, const int i);
-  chunk make_word_double(const char c, const double i);
+  chunk make_word_float(const char c, const float i);
   chunk make_percent_chunk();
 
   bool operator==(const chunk& l, const chunk& r);
@@ -401,7 +401,7 @@ namespace gpr {
 
   addr make_int_address(const int i);
 
-  addr make_double_address(const double i);
+  addr make_float_address(const float i);
   
 }
 
