@@ -19,8 +19,8 @@ int main(int argc, char** argv) {
     cout << "and print it out:" << endl;
 
     chunk G1 = make_word_int('G', 1);
-    chunk X1pt7 = make_word_double('X', 1.7);
-    chunk YN1 = make_word_double('Y', -1.0);
+    chunk X1pt7 = make_word_float('X', 1.7);
+    chunk YN1 = make_word_float('Y', -1.0);
     chunk comment = make_comment('(', ')', "This is a silly comment");
 
     block artificial_block(false, {G1, X1pt7, YN1, comment});
